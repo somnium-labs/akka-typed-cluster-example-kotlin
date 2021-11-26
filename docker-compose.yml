@@ -10,6 +10,8 @@ services:
       - "7199:7199"
       - "9042:9042"
       - "9160:9160"
+    networks:
+      - statepoc
 
   seed:
     build: ./
@@ -17,8 +19,8 @@ services:
       - cassandra-db
     depends_on:
       - cassandra-db
-    ports:
-      - "1600:1600"
+#    ports:
+#      - "1600:1600"
     environment:
       CLUSTER_IP: seed
       CLUSTER_PORT: 1600
@@ -26,6 +28,8 @@ services:
       CASSANDRA_CONTACT_POINT1: cassandra-db:9042
     entrypoint:
       [ "java", "-Dconfig.resource=cluster-application-docker.conf", "-jar", "/etc/akka/app.jar" ]
+    networks:
+      - statepoc
 
   cluster1:
     build: ./
@@ -33,8 +37,8 @@ services:
       - cassandra-db
     depends_on:
       - cassandra-db
-    ports:
-      - "1601:1601"
+#    ports:
+#      - "1601:1601"
     environment:
       CLUSTER_IP: cluster1
       CLUSTER_PORT: 1601
@@ -42,6 +46,8 @@ services:
       CASSANDRA_CONTACT_POINT1: cassandra-db:9042
     entrypoint:
       [ "java", "-Dconfig.resource=cluster-application-docker.conf", "-jar", "/etc/akka/app.jar" ]
+    networks:
+      - statepoc
 
   cluster2:
     build: ./
@@ -49,8 +55,8 @@ services:
       - cassandra-db
     depends_on:
       - cassandra-db
-    ports:
-      - "1602:1602"
+#    ports:
+#      - "1602:1602"
     environment:
       CLUSTER_IP: cluster2
       CLUSTER_PORT: 1602
@@ -58,6 +64,8 @@ services:
       CASSANDRA_CONTACT_POINT1: cassandra-db:9042
     entrypoint:
       [ "java", "-Dconfig.resource=cluster-application-docker.conf", "-jar", "/etc/akka/app.jar" ]
+    networks:
+      - statepoc
 
 #  endpoint:
 #    build: ./
@@ -75,6 +83,6 @@ services:
 #    networks:
 #      - statepoc
 
-#networks:
-#  statepoc:
-#    driver: bridge
+networks:
+  statepoc:
+    driver: bridge
