@@ -1,0 +1,38 @@
+###
+GET http://localhost:8082/artifactState/isArtifactReadByUser?artifactId=1&userId=Michael
+
+###
+GET http://localhost:8082/artifactState/isArtifactReadByUser?artifactId=2&userId=Asdf
+
+###
+GET http://localhost:8082/artifactState/isArtifactInUserFeed?artifactId=1&userId=Michael
+
+###
+GET http://localhost:8082/artifactState/getAllStates?artifactId=1&userId=Michael
+
+###
+POST http://localhost:8082/artifactState/setArtifactReadByUser
+Content-Type: application/json
+
+{
+  "artifactId": 1,
+  "userId": "Michael"
+}
+
+###
+POST http://localhost:8082/artifactState/setArtifactAddedToUserFeed
+Content-Type: application/json
+
+{
+  "artifactId": 1,
+  "userId": "Michael"
+}
+
+###
+POST http://localhost:8082/artifactState/setArtifactRemovedFromUserFeed
+Content-Type: application/json
+
+{
+  "artifactId": 1,
+  "userId": "Michael"
+}
